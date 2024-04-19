@@ -3,9 +3,15 @@ import styles from "../styles/App.module.css";
 import { AppContext } from "../utils/contextProvider";
 
 import { Home } from "./routes/home";
+import Navbar from "./common/navbar";
+import { Login } from "./routes/login";
+import { EditPostPage } from "./routes/editPost";
+import { CreatePostPage } from "./routes/createPost";
 import ErrorPage from "./routes/error";
+
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Content() {
   return (
@@ -20,8 +26,16 @@ function Content() {
 }
 
 function Root() {
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["token"]);
   const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    if (cookies.token === undefined) {
+      navigate("/login");
+    }
+  }, [cookies.token, navigate]);
+
   return (
     <AppContext.Provider
       value={{
@@ -31,6 +45,7 @@ function Root() {
         setUserProfile,
       }}
     >
+      <Navbar />
       <Content />
     </AppContext.Provider>
   );
@@ -46,6 +61,18 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/post/edit",
+          element: <EditPostPage />,
+        },
+        {
+          path: "/post/create",
+          element: <CreatePostPage />,
         },
       ],
     },

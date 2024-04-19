@@ -1,3 +1,3 @@
 export function Home() {
-  return <div>home</div>;
+  return <div>This is an admin page for the blog app</div>;
 }

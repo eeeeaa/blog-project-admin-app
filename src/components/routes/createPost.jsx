@@ -1,5 +1,5 @@
 import { AppContext } from "../../utils/contextProvider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -12,6 +12,12 @@ export function CreatePostPage() {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
   const [status, setStatus] = useState("Unpublished");
+
+  useEffect(() => {
+    if (cookies.token === undefined) {
+      navigate("/login");
+    }
+  }, [navigate, cookies.token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
