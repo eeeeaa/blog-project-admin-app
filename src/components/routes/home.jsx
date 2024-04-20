@@ -26,6 +26,9 @@ function ContentItem({ post }) {
           </Link>
         </div>
       </div>
+      <div className={styles["post-item-status"]}>
+        status: {post.postStatus}
+      </div>
       <div className={styles["post-item-date"]}>
         updated: {post.prettifyUpdatedAt()}
       </div>
@@ -44,11 +47,9 @@ export function Home() {
     <div>
       {posts.length > 0 ? (
         <div className={styles["home-layout"]}>
-          {posts
-            .filter((post) => post.postStatus === "Published")
-            .map((post) => {
-              return <ContentItem key={post.postId} post={post} />;
-            })}
+          {posts.map((post) => {
+            return <ContentItem key={post.postId} post={post} />;
+          })}
         </div>
       ) : (
         <div>No Blogs</div>

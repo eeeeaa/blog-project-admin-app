@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../utils/contextProvider";
 import { useContext, useEffect } from "react";
 
-export function EditPostPage() {
+export function EditPostConfirmPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { cookies } = useContext(AppContext);
@@ -13,5 +13,20 @@ export function EditPostPage() {
     }
   }, [navigate, cookies.token]);
 
-  return <div>edit post {postId}</div>;
+  return (
+    <div>
+      <div>edit post {postId}</div>
+      <div>
+        <button type="button">Submit</button>
+        <button
+          type="button"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Go Back
+        </button>
+      </div>
+    </div>
+  );
 }

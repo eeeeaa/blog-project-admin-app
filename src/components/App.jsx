@@ -5,8 +5,8 @@ import { AppContext } from "../utils/contextProvider";
 import { Home } from "./routes/home";
 import Navbar from "./common/navbar";
 import { Login } from "./routes/login";
-import { EditPostPage } from "./routes/editPost";
-import { DeletePostPage } from "./routes/deletePost";
+import { EditPostConfirmPage } from "./routes/editPost";
+import { DeletePostConfirmPage } from "./routes/deletePost";
 import { CreatePostPage } from "./routes/createPost";
 import ErrorPage from "./common/error";
 
@@ -67,11 +67,11 @@ function App() {
         },
         {
           path: "/post/:postId/edit",
-          element: <EditPostPage />,
+          element: <EditPostConfirmPage />,
         },
         {
           path: "/post/:postId/delete",
-          element: <DeletePostPage />,
+          element: <DeletePostConfirmPage />,
         },
         {
           path: "/post/create",

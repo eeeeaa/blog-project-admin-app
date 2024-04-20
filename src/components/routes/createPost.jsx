@@ -28,7 +28,6 @@ export function CreatePostPage() {
       );
       //TODO refresh component without reloading?
       navigate("/");
-      navigate(0);
     } catch (error) {
       navigate("/error");
     }

@@ -160,39 +160,35 @@ export const useUpdatePost = (postId, postModel, token = "") => {
   return { post, error, loading };
 };
 
-export const useDeletePost = (postId, token = "") => {
-  const [post, setPost] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+export const deletePost = async (postId, token = "") => {
+  let post = {};
+  let error = null;
 
-  useEffect(() => {
-    const headers = { Authorization: `Bearer ${token}` };
-    fetch(`${postUri}/${postId}`, {
-      method: "DELETE",
-      mode: "cors",
-      headers: headers,
+  const headers = { Authorization: `Bearer ${token}` };
+
+  await fetch(`${postUri}/${postId}`, {
+    method: "DELETE",
+    mode: "cors",
+    headers: headers,
+  })
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("server error");
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error("server error");
-        }
-        return response.json();
-      })
-      .then((response) =>
-        setPost(
-          new Post(
-            response.deletedPost._id,
-            response.deletedPost.post_title,
-            response.deletedPost.post_content,
-            response.deletedPost.created_at,
-            response.deletedPost.updated_at,
-            response.deletedPost.post_status
-          )
-        )
-      )
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
-  }, [postId, token]);
+    .then(
+      (response) =>
+        (post = new Post(
+          response.deletedPost._id,
+          response.deletedPost.post_title,
+          response.deletedPost.post_content,
+          response.deletedPost.created_at,
+          response.deletedPost.updated_at,
+          response.deletedPost.post_status
+        ))
+    )
+    .catch((err) => (error = err));
 
-  return { post, error, loading };
+  return { post, error };
 };
