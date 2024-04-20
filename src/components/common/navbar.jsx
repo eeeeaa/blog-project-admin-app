@@ -55,10 +55,12 @@ function Logout() {
     setUserProfile({});
     navigate("/");
   };
-  <li className={styles["nav-item"]} onClick={handleLogout}>
-    <IoLogOutOutline />
-    Logout
-  </li>;
+  return (
+    <li className={styles["nav-item"]} onClick={handleLogout}>
+      <IoLogOutOutline />
+      Logout
+    </li>
+  );
 }
 
 function MenuSection() {
