@@ -6,8 +6,9 @@ import { Home } from "./routes/home";
 import Navbar from "./common/navbar";
 import { Login } from "./routes/login";
 import { EditPostPage } from "./routes/editPost";
+import { DeletePostPage } from "./routes/deletePost";
 import { CreatePostPage } from "./routes/createPost";
-import ErrorPage from "./routes/error";
+import ErrorPage from "./common/error";
 
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
@@ -16,10 +17,8 @@ import { useNavigate } from "react-router-dom";
 function Content() {
   return (
     <div className={styles.content}>
-      <div className={styles["home-layout"]}>
-        <div className={styles["content-layout"]}>
-          <Outlet />
-        </div>
+      <div className={styles["content-layout"]}>
+        <Outlet />
       </div>
     </div>
   );
@@ -67,8 +66,12 @@ function App() {
           element: <Login />,
         },
         {
-          path: "/post/edit",
+          path: "/post/:postId/edit",
           element: <EditPostPage />,
+        },
+        {
+          path: "/post/:postId/delete",
+          element: <DeletePostPage />,
         },
         {
           path: "/post/create",

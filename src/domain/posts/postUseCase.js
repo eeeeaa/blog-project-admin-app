@@ -38,7 +38,7 @@ export const useGetPosts = (token = "", limit = 20) => {
       )
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
-  }, [token]);
+  }, [token, limit]);
 
   return { posts, error, loading };
 };

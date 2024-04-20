@@ -29,6 +29,9 @@ export function Login() {
   };
   return (
     <div className={styles["login-layout"]}>
+      <h4 className={styles["login-notice"]}>
+        Please login to perform admin operations
+      </h4>
       <form method="post" onSubmit={handleSubmit}>
         <div className={styles["login-form"]}>
           <div className={styles["login-form-input"]}>

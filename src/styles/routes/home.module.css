@@ -1,0 +1,41 @@
+.home-layout {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}
+
+.post-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 1px solid white;
+  border-radius: 1em;
+  gap: 1em;
+}
+
+.post-icon-list {
+  display: flex;
+  gap: 0.5em;
+}
+
+.post-icon {
+  height: 24px;
+  width: 24px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.post-icon:hover {
+  color: #64748b;
+  transform: scale(1.2);
+}
+
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}

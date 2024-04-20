@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useContext } from "react";
 import { AppContext } from "../../utils/contextProvider";
-import { useContext, useEffect } from "react";
 
-export function EditPostPage() {
+export function DeletePostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { cookies } = useContext(AppContext);
@@ -13,5 +13,5 @@ export function EditPostPage() {
     }
   }, [navigate, cookies.token]);
 
-  return <div>edit post {postId}</div>;
+  return <div>delete post {postId}</div>;
 }

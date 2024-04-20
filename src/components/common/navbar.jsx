@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { SlHome } from "react-icons/sl";
 import { MdOutlineLogin } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
-import { FaRegEdit } from "react-icons/fa";
 
 import { AppContext } from "../../utils/contextProvider";
 import { useContext } from "react";
@@ -52,7 +51,6 @@ function MenuSection() {
   return (
     <ul className={styles["nav-menu-list"]}>
       <NavItem url="/" label={"Home"} icon={<SlHome />} />
-      <NavItem url="/post/edit" label={"Edit post"} icon={<FaRegEdit />} />
       <NavItem
         url="/post/create"
         label={"Create post"}

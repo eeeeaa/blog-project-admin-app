@@ -70,14 +70,8 @@ body {
   padding: 1em;
 }
 
-.home-layout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 1em;
-  min-width: 100%;
-}
-
 .content-layout {
+  height: 100%;
+  width: 100%;
   padding: 1em;
 }
