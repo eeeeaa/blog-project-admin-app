@@ -5,15 +5,22 @@ import { useContext } from "react";
 import { AppContext } from "../../utils/contextProvider";
 import styles from "../../styles/routes/login.module.css";
 
+import ErrorPage from "../common/error";
+import LoadingPage from "../common/loadingPage";
+
 export function Login() {
   const navigate = useNavigate();
   const { setCookie, setUserProfile } = useContext(AppContext);
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const data = await loginUseCase(username, password);
       setCookie("token", data.token, {
         secure: true,
@@ -22,11 +29,16 @@ export function Login() {
         maxAge: 86400,
       });
       setUserProfile({ username: data.username });
+      setLoading(false);
       navigate("/");
     } catch (error) {
-      navigate("/error");
+      setError(error);
     }
   };
+
+  if (error) return <ErrorPage errorMsg={error.message} />;
+  if (loading) return <LoadingPage />;
+
   return (
     <div className={styles["login-layout"]}>
       <h4 className={styles["login-notice"]}>

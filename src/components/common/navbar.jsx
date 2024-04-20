@@ -1,10 +1,11 @@
 import styles from "../../styles/common/navbar.module.css";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { SlHome } from "react-icons/sl";
 import { MdOutlineLogin } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 
 import { AppContext } from "../../utils/contextProvider";
 import { useContext } from "react";
@@ -46,8 +47,22 @@ function NavItem({ url, label, icon = null }) {
   );
 }
 
+function Logout() {
+  const navigate = useNavigate();
+  const { removeCookie, setUserProfile } = useContext(AppContext);
+  const handleLogout = () => {
+    removeCookie("token");
+    setUserProfile({});
+    navigate("/");
+  };
+  <li className={styles["nav-item"]} onClick={handleLogout}>
+    <IoLogOutOutline />
+    Logout
+  </li>;
+}
+
 function MenuSection() {
-  const { cookies } = useContext(AppContext);
+  const { cookies, userProfile } = useContext(AppContext);
   return (
     <ul className={styles["nav-menu-list"]}>
       <NavItem url="/" label={"Home"} icon={<SlHome />} />
@@ -56,10 +71,10 @@ function MenuSection() {
         label={"Create post"}
         icon={<IoCreateOutline />}
       />
-      {cookies.token === undefined ? (
+      {cookies.token === undefined || userProfile.username === undefined ? (
         <NavItem url="/login" label={"Login"} icon={<MdOutlineLogin />} />
       ) : (
-        <div></div>
+        <Logout />
       )}
     </ul>
   );

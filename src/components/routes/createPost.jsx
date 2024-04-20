@@ -8,16 +8,16 @@ import { Post } from "../../model/postUiModel";
 
 export function CreatePostPage() {
   const navigate = useNavigate();
-  const { cookies } = useContext(AppContext);
+  const { cookies, userProfile } = useContext(AppContext);
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
   const [status, setStatus] = useState("Unpublished");
 
   useEffect(() => {
-    if (cookies.token === undefined) {
+    if (cookies.token === undefined || userProfile.username === undefined) {
       navigate("/login");
     }
-  }, [navigate, cookies.token]);
+  }, [navigate, cookies.token, userProfile]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

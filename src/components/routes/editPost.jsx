@@ -5,13 +5,13 @@ import { useContext, useEffect } from "react";
 export function EditPostConfirmPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const { cookies } = useContext(AppContext);
+  const { cookies, userProfile } = useContext(AppContext);
 
   useEffect(() => {
-    if (cookies.token === undefined) {
+    if (cookies.token === undefined || userProfile.username === undefined) {
       navigate("/login");
     }
-  }, [navigate, cookies.token]);
+  }, [navigate, cookies.token, userProfile]);
 
   return (
     <div>

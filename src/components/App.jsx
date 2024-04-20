@@ -26,7 +26,7 @@ function Content() {
 
 function Root() {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
@@ -40,6 +40,7 @@ function Root() {
       value={{
         cookies,
         setCookie,
+        removeCookie,
         userProfile,
         setUserProfile,
       }}
