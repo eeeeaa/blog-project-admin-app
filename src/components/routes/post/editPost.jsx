@@ -1,21 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { AppContext } from "../../utils/contextProvider";
+import { AppContext } from "../../../utils/contextProvider";
 import { useContext, useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import styles from "../../styles/routes/editPost.module.css";
+import styles from "../../../styles/routes/editPost.module.css";
 import { decode } from "html-entities";
 
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-import { Post } from "../../model/postUiModel";
+import { Post } from "../../../model/postUiModel";
 
-import { useGetComments } from "../../domain/comments/commentUseCase";
-import { updatePost } from "../../domain/posts/postUseCase";
+import { useGetComments } from "../../../domain/comments/commentUseCase";
+import { updatePost } from "../../../domain/posts/postUseCase";
 
-import ErrorPage from "../common/error";
-import LoadingPage from "../common/loadingPage";
+import ErrorPage from "../../common/error";
+import LoadingPage from "../../common/loadingPage";
 import LinesEllipsis from "react-lines-ellipsis";
 import PropTypes from "prop-types";
 

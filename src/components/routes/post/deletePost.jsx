@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-import { deletePost } from "../../domain/posts/postUseCase";
-import { AppContext } from "../../utils/contextProvider";
+import { deletePost } from "../../../domain/posts/postUseCase";
+import { AppContext } from "../../../utils/contextProvider";
 
-import ErrorPage from "../common/error";
-import LoadingPage from "../common/loadingPage";
+import ErrorPage from "../../common/error";
+import LoadingPage from "../../common/loadingPage";
 
 export function DeletePostConfirmPage() {
   const navigate = useNavigate();

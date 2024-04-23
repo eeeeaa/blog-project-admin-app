@@ -26,6 +26,13 @@
   justify-content: center;
 }
 
+.edit-post-date-list {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+}
+
 .form-area {
   display: flex;
   flex-direction: column;

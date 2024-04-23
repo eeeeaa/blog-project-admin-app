@@ -1,12 +1,12 @@
-import { AppContext } from "../../utils/contextProvider";
+import { AppContext } from "../../../utils/contextProvider";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import styles from "../../styles/routes/createPost.module.css";
+import styles from "../../../styles/routes/createPost.module.css";
 
-import { createPost } from "../../domain/posts/postUseCase";
-import { Post } from "../../model/postUiModel";
+import { createPost } from "../../../domain/posts/postUseCase";
+import { Post } from "../../../model/postUiModel";
 
 const tinyKey = import.meta.env.VITE_TINY_MCE_KEY;
 

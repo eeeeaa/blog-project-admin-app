@@ -5,9 +5,9 @@ import { AppContext } from "../utils/contextProvider";
 import { Home } from "./routes/home";
 import Navbar from "./common/navbar";
 import { Login } from "./routes/login";
-import { EditPostConfirmPage } from "./routes/editPost";
-import { DeletePostConfirmPage } from "./routes/deletePost";
-import { CreatePostPage } from "./routes/createPost";
+import { EditPostConfirmPage } from "./routes/post/editPost";
+import { DeletePostConfirmPage } from "./routes/post/deletePost";
+import { CreatePostPage } from "./routes/post/createPost";
 import ErrorPage from "./common/error";
 
 import { useCookies } from "react-cookie";
