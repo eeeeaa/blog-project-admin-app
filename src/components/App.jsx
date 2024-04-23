@@ -11,7 +11,7 @@ import { CreatePostPage } from "./routes/createPost";
 import ErrorPage from "./common/error";
 
 import { useCookies } from "react-cookie";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Content() {
@@ -27,7 +27,6 @@ function Content() {
 function Root() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
-  const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
     if (cookies.token === undefined) {
@@ -41,8 +40,6 @@ function Root() {
         cookies,
         setCookie,
         removeCookie,
-        userProfile,
-        setUserProfile,
       }}
     >
       <Navbar />

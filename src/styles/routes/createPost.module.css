@@ -1,0 +1,35 @@
+.post-form-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-form-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .form-input {
+    display: grid;
+    grid-template: 1fr/1fr 1fr;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-area {
+    display: grid;
+    grid-template: 1fr 10fr/1fr;
+    justify-content: center;
+    .form-area-label {
+      justify-self: center;
+    }
+  }
+
+  .form-dropdown {
+    display: grid;
+    grid-template: 1fr/1fr 1fr;
+    align-items: center;
+    justify-content: center;
+  }
+}

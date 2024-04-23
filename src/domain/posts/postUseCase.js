@@ -117,47 +117,42 @@ export const createPost = async (postModel, token = "") => {
   return { post, error };
 };
 
-export const useUpdatePost = (postId, postModel, token = "") => {
+export const updatePost = async (postId, postModel, token = "") => {
   const jsonObj = postToJsonObjMapper(postModel);
-  const [post, setPost] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  let post = null;
+  let error = null;
 
-  useEffect(() => {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-    fetch(`${postUri}/${postId}`, {
-      method: "PUT",
-      mode: "cors",
-      headers: headers,
-      body: JSON.stringify(jsonObj),
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+  await fetch(`${postUri}/${postId}`, {
+    method: "PUT",
+    mode: "cors",
+    headers: headers,
+    body: JSON.stringify(jsonObj),
+  })
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("server error");
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error("server error");
-        }
-        return response.json();
-      })
-      .then((response) =>
-        setPost(
-          new Post(
-            response.updatedPost._id,
-            response.updatedPost.post_title,
-            response.updatedPost.post_content,
-            response.updatedPost.created_at,
-            response.updatedPost.updated_at,
-            response.updatedPost.post_status
-          )
-        )
-      )
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
-  }, [jsonObj, postId, token]);
+    .then(
+      (response) =>
+        (post = new Post(
+          response.updatedPost._id,
+          response.updatedPost.post_title,
+          response.updatedPost.post_content,
+          response.updatedPost.created_at,
+          response.updatedPost.updated_at,
+          response.updatedPost.post_status
+        ))
+    )
+    .catch((err) => (error = err));
 
-  return { post, error, loading };
+  return { post, error };
 };
 
 export const deletePost = async (postId, token = "") => {

@@ -20,17 +20,15 @@ NavItem.propTypes = {
 };
 
 function NameLogo({ title }) {
-  const { userProfile } = useContext(AppContext);
+  const { cookies } = useContext(AppContext);
 
   return (
     <div className={styles["blog-logo-layout"]}>
       <h1 className={styles["blog-title"]}>{title}</h1>
-      {userProfile.username === undefined ? (
+      {cookies.token === undefined ? (
         <div className={styles["user-profile"]}>Not logged in</div>
       ) : (
-        <div className={styles["user-profile"]}>
-          user: {userProfile.username}
-        </div>
+        <div className={styles["user-profile"]}>logged in</div>
       )}
     </div>
   );
@@ -49,10 +47,9 @@ function NavItem({ url, label, icon = null }) {
 
 function Logout() {
   const navigate = useNavigate();
-  const { removeCookie, setUserProfile } = useContext(AppContext);
+  const { removeCookie } = useContext(AppContext);
   const handleLogout = () => {
     removeCookie("token");
-    setUserProfile({});
     navigate("/");
   };
   return (
@@ -64,7 +61,7 @@ function Logout() {
 }
 
 function MenuSection() {
-  const { cookies, userProfile } = useContext(AppContext);
+  const { cookies } = useContext(AppContext);
   return (
     <ul className={styles["nav-menu-list"]}>
       <NavItem url="/" label={"Home"} icon={<SlHome />} />
@@ -73,7 +70,7 @@ function MenuSection() {
         label={"Create post"}
         icon={<IoCreateOutline />}
       />
-      {cookies.token === undefined || userProfile.username === undefined ? (
+      {cookies.token === undefined ? (
         <NavItem url="/login" label={"Login"} icon={<MdOutlineLogin />} />
       ) : (
         <Logout />

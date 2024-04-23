@@ -1,0 +1,87 @@
+.edit-post-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-post-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.edit-post-input {
+  display: grid;
+  grid-template: 1fr/1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-post-dropdown {
+  display: grid;
+  grid-template: 1fr/1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-area-label {
+  align-self: center;
+}
+
+.comment-list {
+  width: 80%;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}
+
+.comment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: center;
+  padding: 1em;
+  background-color: #1e293b;
+  border-radius: 0.5em;
+}
+
+.comment-item-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-icon-list {
+  display: flex;
+  gap: 0.5em;
+}
+
+.comment-icon {
+  height: 24px;
+  width: 24px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.comment-icon:hover {
+  color: #64748b;
+  transform: scale(1.2);
+}
+
+.no-comment-msg {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}

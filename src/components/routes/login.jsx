@@ -10,7 +10,7 @@ import LoadingPage from "../common/loadingPage";
 
 export function Login() {
   const navigate = useNavigate();
-  const { setCookie, setUserProfile } = useContext(AppContext);
+  const { setCookie } = useContext(AppContext);
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
@@ -24,11 +24,10 @@ export function Login() {
       const data = await loginUseCase(username, password);
       setCookie("token", data.token, {
         secure: true,
-        httpOnly: true,
+        httpOnly: false,
         sameSite: true,
         maxAge: 86400,
       });
-      setUserProfile({ username: data.username });
       setLoading(false);
       navigate("/");
     } catch (error) {

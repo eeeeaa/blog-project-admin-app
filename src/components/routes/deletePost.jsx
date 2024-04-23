@@ -9,16 +9,16 @@ import LoadingPage from "../common/loadingPage";
 export function DeletePostConfirmPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const { cookies, userProfile } = useContext(AppContext);
+  const { cookies } = useContext(AppContext);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (cookies.token === undefined || userProfile.username === undefined) {
+    if (cookies.token === undefined) {
       navigate("/login");
     }
-  }, [navigate, cookies.token, userProfile]);
+  }, [navigate, cookies.token]);
 
   const handleDelete = async () => {
     try {
