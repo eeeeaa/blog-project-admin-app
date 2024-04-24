@@ -49,6 +49,52 @@ export const useGetComments = (postId, token = "") => {
   return { post, comments, error, loading };
 };
 
+export const useGetOneComment = (postId, commentId, token = "") => {
+  const [post, setPost] = useState({});
+  const [comment, setComment] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const headers = { Authorization: `Bearer ${token}` };
+    fetch(`${postUri}/${postId}/comments/${commentId}`, {
+      method: "GET",
+      mode: "cors",
+      headers: headers,
+    })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("server error");
+        }
+        return response.json();
+      })
+      .then((response) => {
+        setComment(
+          new Comment(
+            response.comment._id,
+            response.comment.comment,
+            response.comment.created_at,
+            response.comment.post
+          )
+        );
+        setPost(
+          new Post(
+            response.post._id,
+            response.post.post_title,
+            response.post.post_content,
+            response.post.created_at,
+            response.post.updated_at,
+            response.post.post_status
+          )
+        );
+      })
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
+  }, [postId, commentId, token]);
+
+  return { post, comment, error, loading };
+};
+
 export const createComment = async (postId, commentModel, token = "") => {
   const jsonObj = commentToJsonObjMapper(commentModel);
   const headers = {

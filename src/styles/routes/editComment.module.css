@@ -1,0 +1,22 @@
+.edit-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.edit-info {
+  display: grid;
+  row-gap: 1em;
+  grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+}
+
+.edit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form-area-label {
+  align-self: center;
+}
