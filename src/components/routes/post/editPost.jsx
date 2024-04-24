@@ -106,7 +106,7 @@ export function EditPostConfirmPage() {
     try {
       await updatePost(
         postId,
-        new Post(null, title, content, null, null, status),
+        new Post(null, title, content.trim(), null, null, status),
         cookies === undefined ? "" : cookies.token
       );
       navigate("/");

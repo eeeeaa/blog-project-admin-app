@@ -33,7 +33,7 @@ export function CreatePostPage() {
     e.preventDefault();
     try {
       const { post, error } = await createPost(
-        new Post(null, title, content, null, null, status),
+        new Post(null, title, content.trim(), null, null, status),
         cookies === undefined ? "" : cookies.token
       );
 
