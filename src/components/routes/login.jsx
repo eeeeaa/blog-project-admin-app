@@ -26,7 +26,7 @@ export function Login() {
         secure: true,
         httpOnly: false,
         sameSite: true,
-        maxAge: 86400,
+        maxAge: 10800, //3 hours
       });
       setLoading(false);
       navigate("/");

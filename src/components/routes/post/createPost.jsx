@@ -8,6 +8,9 @@ import styles from "../../../styles/routes/createPost.module.css";
 import { createPost } from "../../../domain/posts/postUseCase";
 import { Post } from "../../../model/postUiModel";
 
+import ErrorPage from "../../common/error";
+import LoadingPage from "../../common/loadingPage";
+
 const tinyKey = import.meta.env.VITE_TINY_MCE_KEY;
 
 export function CreatePostPage() {
@@ -16,6 +19,9 @@ export function CreatePostPage() {
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
   const [status, setStatus] = useState("Unpublished");
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (cookies.token === undefined) {
@@ -26,16 +32,25 @@ export function CreatePostPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createPost(
+      const { post, error } = await createPost(
         new Post(null, title, content, null, null, status),
         cookies === undefined ? "" : cookies.token
       );
-      //TODO refresh component without reloading?
-      navigate("/");
+
+      setLoading(false);
+
+      if (error != null) {
+        setError(error);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
-      navigate("/error");
+      setError(error);
     }
   };
+
+  if (error) return <ErrorPage errorMsg={error.message} />;
+  if (loading) return <LoadingPage />;
 
   return (
     <div className={styles["post-form-layout"]}>

@@ -7,6 +7,8 @@ import Navbar from "./common/navbar";
 import { Login } from "./routes/login";
 import { EditPostConfirmPage } from "./routes/post/editPost";
 import { DeletePostConfirmPage } from "./routes/post/deletePost";
+import { EditCommentPage } from "./routes/comment/editComment";
+import { DeleteCommentPage } from "./routes/comment/deleteComment";
 import { CreatePostPage } from "./routes/post/createPost";
 import ErrorPage from "./common/error";
 
@@ -74,6 +76,14 @@ function App() {
         {
           path: "/post/create",
           element: <CreatePostPage />,
+        },
+        {
+          path: "/post/:postId/comments/:commentId/edit",
+          element: <EditCommentPage />,
+        },
+        {
+          path: "/post/:postId/comments/:commentId/delete",
+          element: <DeleteCommentPage />,
         },
       ],
     },

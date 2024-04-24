@@ -46,13 +46,13 @@ function CommentItem({ comment }) {
         <div className={styles["comment-icon-list"]}>
           <Link
             className={styles["link"]}
-            to={`/comment/${comment.commentId}/edit`}
+            to={`/post/${comment.postId}/comments/${comment.commentId}/edit`}
           >
             <CiEdit className={styles["comment-icon"]} />
           </Link>
           <Link
             className={styles["link"]}
-            to={`/comment/${comment.commentId}/delete`}
+            to={`/post/${comment.postId}/comments/${comment.commentId}/delete`}
           >
             <MdOutlineDeleteForever className={styles["comment-icon"]} />
           </Link>

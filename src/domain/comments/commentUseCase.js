@@ -86,7 +86,86 @@ export const createComment = async (postId, commentModel, token = "") => {
         response.post.post_status
       );
     })
-    .catch((err) => (error = err));
+    .catch((err) => {
+      error = err;
+    });
 
   return { post, comment, error };
+};
+
+export const updateComment = async (
+  postId,
+  commentId,
+  commentModel,
+  token = ""
+) => {
+  const jsonObj = commentToJsonObjMapper(commentModel);
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  let comment = null;
+  let error = null;
+
+  await fetch(`${postUri}/${postId}/comments/${commentId}`, {
+    method: "PUT",
+    mode: "cors",
+    headers: headers,
+    body: JSON.stringify(jsonObj),
+  })
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("server error");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      comment = new Comment(
+        response.updatedComment._id,
+        response.updatedComment.comment,
+        response.updatedComment.created_at,
+        response.updatedComment.post
+      );
+    })
+    .catch((err) => {
+      error = err;
+    });
+
+  return { comment, error };
+};
+
+export const deleteComment = async (postId, commentId, token = "") => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  let comment = null;
+  let error = null;
+
+  await fetch(`${postUri}/${postId}/comments/${commentId}`, {
+    method: "DELETE",
+    mode: "cors",
+    headers: headers,
+  })
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error("server error");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      comment = new Comment(
+        response.deletedComment._id,
+        response.deletedComment.comment,
+        response.deletedComment.created_at,
+        response.deletedComment.post
+      );
+    })
+    .catch((err) => {
+      error = err;
+    });
+
+  return { comment, error };
 };

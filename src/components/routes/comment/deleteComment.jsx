@@ -1,15 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-import { deletePost } from "../../../domain/posts/postUseCase";
 import { AppContext } from "../../../utils/contextProvider";
-import styles from "../../../styles/routes/deletePost.module.css";
+import { deleteComment } from "../../../domain/comments/commentUseCase";
+import styles from "../../../styles/routes/deleteComment.module.css";
 
 import ErrorPage from "../../common/error";
 import LoadingPage from "../../common/loadingPage";
 
-export function DeletePostConfirmPage() {
+export function DeleteCommentPage() {
   const navigate = useNavigate();
-  const { postId } = useParams();
+  const { postId, commentId } = useParams();
   const { cookies } = useContext(AppContext);
 
   const [error, setError] = useState(null);
@@ -24,8 +24,9 @@ export function DeletePostConfirmPage() {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      const { post, error } = await deletePost(
+      const { comment, error } = await deleteComment(
         postId,
+        commentId,
         cookies.token === undefined ? "" : cookies.token
       );
       setLoading(false);
@@ -45,7 +46,9 @@ export function DeletePostConfirmPage() {
 
   return (
     <div className={styles["delete-layout"]}>
-      <div className={styles["delete-message"]}>delete post {postId} ?</div>
+      <div className={styles["delete-message"]}>
+        delete Comment {commentId} ?
+      </div>
       <div className={styles["delete-button-list"]}>
         <button type="button" onClick={handleDelete}>
           Delete
