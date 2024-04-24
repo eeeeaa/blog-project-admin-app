@@ -58,7 +58,9 @@ function CommentItem({ comment }) {
           </Link>
         </div>
       </div>
-      <div className={styles["comment-date"]}>{comment.createdAt}</div>
+      <div className={styles["comment-date"]}>
+        {comment.prettifyCreatedAt()}
+      </div>
     </div>
   );
 }
